@@ -1,18 +1,22 @@
 <template>
   <div>
-    界面
+    <h1>空界面</h1>
   </div>
 </template>
 
 <script>
 export default {
-  // eslint-disable-next-line vue/multi-word-component-names
   name: "Empty",
   data() {
     return {};
   },
+  // 创建
+  created() {
+  },
+  // 挂载
   mounted() {
   },
+
   methods: {}
 }
 </script>

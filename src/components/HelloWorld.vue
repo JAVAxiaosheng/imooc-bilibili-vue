@@ -1,35 +1,33 @@
 <template>
-  <div class="hello">
-    <h1>{{ msg }}</h1>
-    <p>
-      For a guide and recipes on how to configure / customize this project,<br>
-      check out the
-      <a href="https://cli.vuejs.org" target="_blank" rel="noopener">vue-cli documentation</a>.
-    </p>
-    <h3>Installed CLI Plugins</h3>
-    <ul>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-babel" target="_blank"
-             rel="noopener">babel</a></li>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-eslint" target="_blank"
-             rel="noopener">eslint</a></li>
-    </ul>
-    <h3>Essential Links</h3>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank" rel="noopener">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank" rel="noopener">Forum</a></li>
-      <li><a href="https://chat.vuejs.org" target="_blank" rel="noopener">Community Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank" rel="noopener">Twitter</a></li>
-      <li><a href="https://news.vuejs.org" target="_blank" rel="noopener">News</a></li>
-    </ul>
-    <h3>Ecosystem</h3>
-    <ul>
-      <li><a href="https://router.vuejs.org" target="_blank" rel="noopener">vue-router</a></li>
-      <li><a href="https://vuex.vuejs.org" target="_blank" rel="noopener">vuex</a></li>
-      <li><a href="https://github.com/vuejs/vue-devtools#vue-devtools" target="_blank" rel="noopener">vue-devtools</a>
-      </li>
-      <li><a href="https://vue-loader.vuejs.org" target="_blank" rel="noopener">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">awesome-vue</a></li>
-    </ul>
+  <div class="user-login-form-container">
+    <div class="user-login-form">
+      <div class="user-login-form-title">
+        密码登录-Home
+      </div>
+      <div class="user-login-form-item">
+        <div class="user-login-form-item-title">
+          账号
+        </div>
+        <input placeholder="请输入账号" type="text" v-model="account">
+      </div>
+      <div class="user-login-form-item">
+        <div class="user-login-form-item-title">
+          密码
+        </div>
+        <input placeholder="请输入密码" type="password" v-model="password">
+        <div class="forgetPwd">
+          忘记密码？
+        </div>
+      </div>
+      <div class="user-login-form-footer">
+        <button v-on:click="register(account, password)" class="user-login-form-footer-btn">
+          注册
+        </button>
+        <button @click="login" class="user-login-form-footer-btn">
+          登录
+        </button>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -38,27 +36,138 @@ export default {
   name: 'HelloWorld',
   props: {
     msg: String
+  },
+  data() {
+    return {
+      account: '',
+      password: ''
+    }
+  },
+
+  methods: {
+
+    register(account, password) {
+      console.log('account', account);
+      console.log('password', password);
+      this.account++;
+    },
+
+    login() {
+      if (this.isUserLoggedIn) {
+        console.log('用户已经登录');
+      } else {
+        console.log('用户尚未登录');
+      }
+      this.$destroy();
+    }
+  },
+
+  computed: {
+
+    isUserLoggedIn() {
+      return localStorage.getItem('token');
+    }
+  },
+
+  beforeCreate() {
+    console.log('beforeCreate');
+  },
+
+  created() {
+    console.log('created');
+  },
+
+  beforeMount() {
+    console.log('beforeMount');
+  },
+
+  mounted() {
+    console.log('mounted');
+  },
+
+  beforeUpdate() {
+    console.log(this.account);
+    console.log('beforeUpdate');
+  },
+
+  updated() {
+    console.log(this.account);
+    console.log('updated');
+  },
+
+  beforeDestroy() {
+    console.log(this.account);
+    console.log('beforeDestroy');
+  },
+
+  destroyed() {
+    console.log('destroyed');
   }
+
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-h3 {
-  margin: 40px 0 0;
+<style scoped lang="less">
+
+.user-login-form-container {
+  margin-top: 10%;
+  margin-left: 20%;
+  margin-right: 20%;
+  background-color: #ececec;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+
+  .user-login-form {
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+
+    .user-login-form-title {
+      font-size: 24px;
+      text-align: center;
+      margin-bottom: 40px;
+      font-weight: bold;
+    }
+
+    .user-login-form-item {
+      display: flex;
+      font-size: 20px;
+      margin-bottom: 20px;
+      align-items: center;
+      border: darkgray solid 1px;
+      background-color: white;
+      border-radius: 5px;
+      padding: 6px;
+
+      .user-login-form-item-title {
+        margin-right: 10px;
+        margin-bottom: 5px;
+      }
+
+      input {
+        font-size: 18px;
+        margin-right: 10px;
+        border: none;
+        outline: none;
+      }
+
+      .forgetPwd {
+        font-size: 16px;
+        color: dodgerblue;
+        font-weight: bold;
+        cursor: pointer;
+      }
+
+    }
+
+    .user-login-form-footer {
+      display: flex;
+      justify-content: space-between;
+    }
+  }
 }
 
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-
-a {
-  color: #42b983;
-}
 </style>
