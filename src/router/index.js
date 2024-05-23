@@ -1,14 +1,14 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Empty from "@/components/Empty.vue";
+import UploadVideo from "@/components/UploadVideo.vue";
 
 Vue.use(VueRouter)
 
 const routes = [
     {
         path: '/',
-        name: 'Empty',
-        component: Empty,
+        name: 'UploadVideo',
+        component: UploadVideo,
     }
 ]
 
